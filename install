@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ ! -f install ];then
+echo 'install must be run within its container folder' 1>&2
+exit 1
+fi
+
+currentDir=`pwd`
+oldGoPtah="$GOPATH"
+export GOPATH="$currentDir"
+
+gofmt -w src
+
+go install m3u8tomp4
+
+export GOPATH="$oldGoPtah"
+
+echo 'finished'
